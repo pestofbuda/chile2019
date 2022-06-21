@@ -1,4 +1,8 @@
 import PySimpleGUI as pg
+from PIL import Image
+
+# Get one PNG file from website and save to file
+
 
 #############
 # functions #
@@ -6,6 +10,7 @@ import PySimpleGUI as pg
 
 def welcome_window_function():
     welcome_window_layout = [
+        [pg.Image('/Users/grampas/Documents/Python_Projects/chile_2019/chile2019/Flag_of_Chile.png')],
         [pg.Text("This is an interactive story where your choices determine the endings.")],
         [pg.Text("Your ultimate goal is to show empathy and support for people impacted by socio economic inequalities.")],
         [pg.Text("In this story, you are in Chile in 2019. 95% of the popeulation are suffering becaue of inequalities in opportunities for education, health, and employment.")],
@@ -14,7 +19,7 @@ def welcome_window_function():
         [pg.Button('Visit Downtown'), pg.Button('End Story')]
         ]
     # Step 3: Make window
-    welcome_window = pg.Window("Welcome", welcome_window_layout)
+    welcome_window = pg.Window("Welcome", welcome_window_layout, font='_ 15')
     while True:
         event, values = welcome_window.read()
         if event in (pg.WIN_CLOSED, 'End Story'): 
@@ -28,6 +33,7 @@ def welcome_window_function():
 
 def visit_downtown_window():
     visit_downtown_layout = [
+        [pg.Image('/Users/grampas/Documents/Python_Projects/chile_2019/chile2019/Marching_People.png')],
         [pg.Text("The suffering has caused people to protest and the governemnt has reacted by sending the military on the streets.")],
         [pg.Text("You go to a freinds house and have to close the windows becasue of the tear gas that is always in the air, and you cant go to chat in cafe because everything has been closed down.")],
         [pg.Text("Your friend explains that there will be a march the next day to show solidarity against the inequalities and suffering. She invites you to join. ")],
@@ -35,7 +41,7 @@ def visit_downtown_window():
         [pg.Text("Do you choose to join or not join the march?")],
         [pg.Button("Join March"), pg.Button("Don't Join March")]
     ]
-    visit_downtown_window = pg.Window("You go Downtown...", visit_downtown_layout)
+    visit_downtown_window = pg.Window("You go Downtown...", visit_downtown_layout, font='_ 15')
     while True:
         event, values = visit_downtown_window.read()
         if event == pg.WIN_CLOSED:
@@ -55,13 +61,14 @@ def visit_downtown_window():
 
 def join_march_window():
     join_march_layout = [
+        [pg.Image('/Users/grampas/Documents/Python_Projects/chile_2019/chile2019/Solidarity.png')],
         [pg.Text("1.2 million people attend the march. Its peaceful and empowering.")],
         [pg.Text("You feel an enormous sense of solidarity with the rest of the population.")],
         [pg.Text("The world takes notice, the government takes notice, the result is a change in the constitution and the beginning of more euqal opportunities in Chile for all.")],
         [pg.Text("You made a good choice!")],
         [pg.Button("Final Comments")]
     ]
-    join_march_window = pg.Window("You join the march!", join_march_layout)
+    join_march_window = pg.Window("You join the march!", join_march_layout, font='_ 15')
     while True:
         event, values = join_march_window.read()
         if event == pg.WIN_CLOSED:    
@@ -75,6 +82,7 @@ def join_march_window():
 
 def not_join_march_window():
     not_join_march_layout = [
+        [pg.Image('/Users/grampas/Documents/Python_Projects/chile_2019/chile2019/Regret.png')],
         [pg.Text("You go back to your comfortable home and wonder if you made th eright choice.")],
         [pg.Text("You find out on the news later that 1.2 million people attend the march. ")],
         [pg.Text("The images and comments show that it was a life changing moment, where the country cam together in a show of solidarity.")],
@@ -82,7 +90,7 @@ def not_join_march_window():
         [pg.Text("You regret your decision, and know that in the future you should show more support and empathy to those with less opportunities than you.")],
         [pg.Button("Final Comments")]
     ]
-    not_join_march_window = pg.Window("You don't join the march...", not_join_march_layout)
+    not_join_march_window = pg.Window("You don't join the march...", not_join_march_layout, font='_ 15')
     while True:
         event = not_join_march_window.read()
         if event == pg.WIN_CLOSED:
@@ -90,8 +98,8 @@ def not_join_march_window():
             break
         else:
             event == "Final Comments"
-            final_comments()
             not_join_march_window.close()
+            final_comments()
             break
     not_join_march_window.close()
 
@@ -105,7 +113,7 @@ def final_comments():
         [pg.Text("Thanks for reading my story! See ya!")],
         [pg.Button("Quit")]
     ]
-    final_comments_window = pg.Window("What was this all about?", final_comments_layout)
+    final_comments_window = pg.Window("What was this all about?", final_comments_layout, font='_ 15')
     while True:
         event, values = final_comments_window.read()
         if event in ('Quit', pg.WIN_CLOSED):
