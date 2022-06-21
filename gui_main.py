@@ -1,6 +1,3 @@
-from optparse import Values
-from tkinter import font
-from PIL import Image
 import PySimpleGUI as pg
 
 #############
@@ -20,14 +17,14 @@ def welcome_window_function():
     welcome_window = pg.Window("Welcome", welcome_window_layout)
     while True:
         event, values = welcome_window.read()
-        if event == 'End Story' or event == pg.WIN_CLOSED: 
+        if event in (pg.WIN_CLOSED, 'End Story'): 
             welcome_window.close()
             break
         if event == 'Visit Downtown':
             welcome_window.close()
             visit_downtown_window()
             break
-    #welcome_window.close()
+    welcome_window.close()
 
 def visit_downtown_window():
     visit_downtown_layout = [
@@ -40,17 +37,19 @@ def visit_downtown_window():
     ]
     visit_downtown_window = pg.Window("You go Downtown...", visit_downtown_layout)
     while True:
-        event = visit_downtown_window.read()
-        if event == "Don't Join March" or event == pg.WIN_CLOSED:
+        event, values = visit_downtown_window.read()
+        if event == pg.WIN_CLOSED:
             visit_downtown_window.close()
-            print(event)
             break
-        else:
-            event == "Join March"
+        if event == "Join March":
             visit_downtown_window.close()
             join_march_window()
-            print(event)
             break
+        if event == "Don't Join March":
+            visit_downtown_window.close()
+            not_join_march_window()
+            break
+    visit_downtown_window.close()
 
 
 
@@ -64,16 +63,14 @@ def join_march_window():
     ]
     join_march_window = pg.Window("You join the march!", join_march_layout)
     while True:
-        event = join_march_window.read()
-        if event == pg.WIN_CLOSED:
-            join_march_window.close()
-            print(event)
+        event, values = join_march_window.read()
+        if event == pg.WIN_CLOSED:    
             break
-        else:
-            event == "Final Comments"
+        if event == 'Final Comments':
             join_march_window.close()
-            print(event)
+            final_comments()
             break
+    join_march_window.close()
 
 
 def not_join_march_window():
@@ -82,21 +79,38 @@ def not_join_march_window():
         [pg.Text("You find out on the news later that 1.2 million people attend the march. ")],
         [pg.Text("The images and comments show that it was a life changing moment, where the country cam together in a show of solidarity.")],
         [pg.Text("The world took notice, the government took notice, the result was a change in the constitution and the beginning of more euqal opportunities in Chile for all. ")],
-        [pg.Text("You regret your decision, and know that in the future you should show more support and empathy to those with less opportunities than you.")]
+        [pg.Text("You regret your decision, and know that in the future you should show more support and empathy to those with less opportunities than you.")],
         [pg.Button("Final Comments")]
     ]
-    not_join_march_window = pg.Window("You join the march!", not_join_march_layout)
+    not_join_march_window = pg.Window("You don't join the march...", not_join_march_layout)
     while True:
         event = not_join_march_window.read()
         if event == pg.WIN_CLOSED:
             not_join_march_window.close()
-            print(event)
             break
         else:
             event == "Final Comments"
+            final_comments()
             not_join_march_window.close()
-            print(event)
             break
+    not_join_march_window.close()
+
+
+def final_comments():
+    final_comments_layout = [
+        [pg.Text("Socio economic inequality relates to disparities that individuals might have in both their economic and social resources that are linked to their social class.")],
+        [pg.Text("These disparities include earnings, education, income and more.")],
+        [pg.Text("Just because someone is not directly impacted by socio economic inequalities, doesn't mean they should ignore it.")],
+        [pg.Text("Stay informed, show empathy, try and help make the world a more equal place for everybody. ")],
+        [pg.Text("Thanks for reading my story! See ya!")],
+        [pg.Button("Quit")]
+    ]
+    final_comments_window = pg.Window("What was this all about?", final_comments_layout)
+    while True:
+        event, values = final_comments_window.read()
+        if event in ('Quit', pg.WIN_CLOSED):
+            break
+    final_comments_window.close()
 
 
 
